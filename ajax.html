@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+
+<body>
+    <!-- 
+        Asynchronous JavaScript + XML（异步JavaScript和XML）, 其本身不是一种新技术，
+        而是一个在 2005年被Jesse James Garrett提出的新术语，用来描述一种使用现有技术集合的‘新’方法，
+        包括: HTML or XHTML, Cascading Style Sheets, JavaScript, The Document Object Model, XML, XSLT, 
+        以及最重要的 XMLHttpRequest object。当使用结合了这些技术的AJAX模型以后，
+         网页应用能够快速地将增量更新呈现在用户界面上，而不需要重载（刷新）整个页面。
+         这使得程序能够更快地回应用户的操作
+     -->
+    <!-- 
+         什么是AJAX?
+         AJAX是异步的JavaScript和XML（Asynchronous JavaScript And XML）。
+         简单点说，就是使用 XMLHttpRequest 对象与服务器通信。 它可以使用JSON，XML，HTML和text文本等格式发送和接收数据。
+         AJAX最吸引人的就是它的“异步”特性，也就是说它可以在不重新刷新页面的情况下与服务器通信，交换数据，或更新页面。
+      -->
+    <button id="ajaxButton" type="button">Make a request</button>
+    <script>
+        (function () {
+            var httpRequest;
+            document.getElementById("ajaxButton").addEventListener("click", makeRequest);
+
+            function makeRequest() {
+                httpRequest = new XMLHttpRequest();
+                if (!httpRequest) {
+                    alert('Giving up :( cannot an XMLHTTP instance');
+                    return false;
+                }
+
+                httpRequest.onreadystatechange = alertContents;
+                httpRequest.open('GET', 'test.html');
+                httpRequest.send();
+
+            }
+
+            function alertContents() {
+                if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                    if (httpRequest.status === 200) {
+                        alert(httpRequest.responseText);
+                    } else {
+                        alert('The was a problem with the request.');
+                    }
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>

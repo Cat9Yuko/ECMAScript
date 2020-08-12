@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Json字符双引号替换</title>
+</head>
+
+<body>
+
+
+    <script src="http://weixin.mwr.gov.cn/pollhtml/images/jquery-1.9.1.js"></script>
+    <script>
+        
+        
+        var v = '""<> 名字"';
+        console.log(valueReplace(v));
+        function valueReplace(v) {
+            v = v.toString().replace(new RegExp('(["\"])', 'g'), "\\\"");
+            return v;
+        }
+
+        // $.trim 删除字符串开始和末尾的空格
+        // var eValue = encodeURI($.trim(valueReplace(e.value)))
+    </script>
+</body>
+
+</html>
