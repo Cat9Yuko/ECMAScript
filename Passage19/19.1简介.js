@@ -2,7 +2,7 @@
  * @Author: Cat9Yuko 
  * @Date: 2020-09-30 15:15:08 
  * @Last Modified by: Cat9Yuko
- * @Last Modified time: 2020-10-28 16:08:07
+ * @Last Modified time: 2020-10-28 16:24:05
  */
 
 
@@ -76,4 +76,17 @@ Point.prototype = {
 class B {}
 let b = new B();
 b.constructor === B.prototype.constructor // true
-
+// 上面的代码中, b是B类的实例, 它的constructor方法是B类原型的constructor方法.
+// 由于类的方法(除constructor以外)都定义在prototype对象上, 所以类的新方法可以添加在prototype对象上. Object.assign方法可以很方便地一次向类添加多个方法.
+class Point {
+    constructor() {
+        // ...
+    }
+}
+Object.assign(Point.prototype, {
+    toString(){},
+    toValue(){}
+});
+// prototype对象的constructor属性直接向"类"本身, 这与ES5的行为是一致的.
+Point.prototype.constructor === Point // true
+// 另外
