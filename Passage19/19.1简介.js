@@ -2,7 +2,7 @@
  * @Author: Cat9Yuko 
  * @Date: 2020-09-30 15:15:08 
  * @Last Modified by: Cat9Yuko
- * @Last Modified time: 2020-09-30 17:26:06
+ * @Last Modified time: 2020-10-28 16:08:07
  */
 
 
@@ -40,5 +40,40 @@ class Point {
 class Point {
     // ...
 }
-typeof Point 
-Point === Point.prototype.constructor
+typeof Point // "function"
+Point === Point.prototype.constructor // true
+// 上面的代码表名, 类的数据类型就是函数, 类本身就指向构造函数.
+// 使用的时候也是直接对类使用new命令, 跟构造函数的用法完全 一直.
+class Bar {
+    doStuff() {
+        console.log('stuff');
+    }
+}
+var b = new Bar();
+b.doStuff() // "stuff"
+
+// 构造函数的prototype属性在ES6的 "类" 上继续存在. 事实上, 类的所有方法都定义在类的prototype属性上.
+class Point {
+    constructor() {
+        // ...
+    }
+    toString() {
+        // ...
+    }
+    toValue() {
+        // ...
+    }
+}
+
+// 等用于
+Point.prototype = {
+    constructor() {},
+    toString() {},
+    toValue() {},
+}
+
+// 在类的实例上调用方法, 其实就是调用原型上的方法.
+class B {}
+let b = new B();
+b.constructor === B.prototype.constructor // true
+
