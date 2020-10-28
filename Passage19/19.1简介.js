@@ -2,7 +2,7 @@
  * @Author: Cat9Yuko 
  * @Date: 2020-09-30 15:15:08 
  * @Last Modified by: Cat9Yuko
- * @Last Modified time: 2020-10-28 16:24:05
+ * @Last Modified time: 2020-10-28 16:47:26
  */
 
 
@@ -84,9 +84,45 @@ class Point {
     }
 }
 Object.assign(Point.prototype, {
-    toString(){},
-    toValue(){}
+    toString() {},
+    toValue() {}
 });
 // prototype对象的constructor属性直接向"类"本身, 这与ES5的行为是一致的.
 Point.prototype.constructor === Point // true
-// 另外
+// 另外, 类的内部定义的所有方法都是不可枚举的(non-enumerable).
+class Point {
+    constructor(x, y) {
+        // ...
+    }
+    toString() {
+        // ...
+    }
+    toValue() {}
+}
+Object.keys(Point.prototype)
+// []
+console.log(Object.getOwnPropertyNames(Point.prototype));
+// [ 'constructor', 'toString', 'toValue' ]
+
+// 上面的代码中, toString方法是Point类内部定义的方法, 它是不可枚举的. 这一点与ES5的行为不一致.
+var Point = function (x, y) {
+    // ...
+}
+Point.prototype.toString = function () {}
+Object.keys(Point.prototype)
+// ["toString"]
+console.log(Object.getOwnPropertyNames(Point.prototype))
+// [ 'constructor', 'toString' ]
+
+// 上面的代码采用了ES5的写法, toString方法就是可枚举的.
+// 类的属性名可以采用表达式.
+let methodName = 'getArea';
+class Square {
+    constructor(length) {
+        // ...
+    }
+    [methodName]() {
+        // ...
+    }
+}
+// 上面的代码中, Square类的方法名getArea是从表达式得到的
