@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- 页面内嵌的脚本 -->
+    <script type="application/javascript">
+        // module code
+    </script>
+
+    <!-- 外部脚本 -->
+    <script type="application/javascript" src="module.js"></script>
+
+    <!-- 异步加载 -->
+    <script src="module.js" defer></script>
+    <script src="module.js" async></script>
+
+    <!-- 上面的代码中, <script>标签打开defer或async属性, 脚本就会异步加载. 渲染引擎遇到这一行命令就会开始下载外部脚本, 但不会等它下载和执行, 而是直接执行后面的命令
+        defer 与 async 的区别是, 前者要等到整个页面正常渲染结束才会执行, 而后者一旦下载完成, 渲染引擎会中断渲染, 执行这个脚本以后再继续渲染. 
+    用一句话来说, defer是 "渲染完再执行", async 是 "下载完就执行". 另外, 如果有多个defer脚本, 则会按照它们在页面出现的顺序加载, 而多个async脚本是不能保证加载顺序的. -->
+
+    <!-- 浏览器加载ES6模块时也使用 <script>标签, 但是要加入 type="module" 属性. -->
+        <script type="module" src="module.js"></script>
+</body>
+
+</html>
